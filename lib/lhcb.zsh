@@ -4,10 +4,11 @@
 #export DIRACPWD=''
 #export DIRACODE='///'
 
-
+#lxplus, aiadm
 alias lxplus='ssh $CERNUSER@lxplus.cern.ch'
 alias aiadm='ssh $CERNUSER@aiadm.cern.ch'
 
+#DIRAC production voboxes
 alias volhcb02='ssh $CERNUSER@aiadm -t ssh volhcb02'
 alias volhcb03='ssh $CERNUSER@aiadm -t ssh volhcb03'
 alias volhcb04='ssh $CERNUSER@aiadm -t ssh volhcb04'
@@ -54,14 +55,18 @@ alias lbvobox42='ssh $CERNUSER@aiadm -t ssh lbvobox42'
 alias lbvobox43='ssh $CERNUSER@aiadm -t ssh lbvobox43'
 alias lbvobox80='ssh $CERNUSER@aiadm -t ssh lbvobox80'
 alias lbvobox81='ssh $CERNUSER@aiadm -t ssh lbvobox81'
-
+#DIRAC certification voboxes
 alias certMachine='ssh $CERNUSER@aiadm -t ssh lbtestvobox'
 alias certMachine2='ssh $CERNUSER@aiadm -t ssh lbtestvobox2'
 
+#DIRAC build machines
 alias lhcbci99='ssh $CERNUSER@aiadm -t ssh lhcbci99'
 alias lhcbci12='ssh $CERNUSER@aiadm -t ssh lhcbci12'
 alias lhcbci11='ssh $CERNUSER@aiadm -t ssh lhcbci11'
+alias cernvmci='ssh dirac@lhcbci-cernvm02'
+alias cernvmci-mp='ssh dirac@lhcbci-cernvm-mp-01'
 
+#DBs
 alias dbodProd='mysql -u$DIRACUSER -pPWD$DIRACPWD -hdbod-lbprod.cern.ch -P5501'
 alias dbodWMS='mysql -u$DIRACUSER -p$DIRACPWD -hdbod-lbwms.cern.ch -P5506'
 alias dbodDFC='mysql -u$DIRACUSER -p$DIRACPWD -hdbod-dfc.cern.ch -P5502'
@@ -71,6 +76,16 @@ alias dbodCert='mysql -u$DIRACUSER -p$DIRACPWD -hdbod-lbcertif.cern.ch -P5506'
 alias dbodDev='mysql -u$DIRACUSER -p$DIRACPWD -hdbod-lbdev.cern.ch -P5502'
 alias dbodCI='mysql -u$DIRACUSER -p -hdbod-dirac-ci.cern.ch -P5501'
 
-export PYTHONPATH=$PYTHONPATH:$DIRACCODE
-export PATH=$PATH:$DIRACCODE/scripts/
+#DIRAC paths
+#export PYTHONPATH=$PYTHONPATH:$DIRACCODE
+#export PATH=$PATH:$DIRACCODE/scripts/
+
+#not working yet
+function lbvoboxexec {
+  ssh $CERNUSER@aiadm.cern.ch -t 'ssh lbvobox\"$1\" "grep EXCEPT /opt/dirac/runit/*/*/log/current"'
+}
+
+function lbvobxconnect {
+  ssh $CERNUSER@aiadm.cern.ch -t 'ssh lbvobox\"$1\"'
+}
 
